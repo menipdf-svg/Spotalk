@@ -470,36 +470,8 @@ private fun VoiceSection(vm: MainViewModel, modifier: Modifier = Modifier) {
 @Composable
 private fun AppearanceSection(vm: MainViewModel, modifier: Modifier = Modifier) {
     val uniform by vm.settings.uniformTiles.collectAsState()
-    val imageMode by vm.settings.imageMode.collectAsState()
     Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text("תצוגה", style = MaterialTheme.typography.titleMedium)
-        Text("תמונות", style = MaterialTheme.typography.bodyLarge)
-        listOf(
-            Triple("all", "כל התמונות", "תמונות של אמנים, אלבומים ופלייליסטים."),
-            Triple("male", "רק זמרים גברים", "תמונה מוצגת רק כשכל האמנים זוהו כגברים. זמרות, להקות מעורבות ולא ידוע — בלי תמונה. אפשר לסמן ידנית למטה, ב\"סימון אמנים\"."),
-            Triple("none", "בלי תמונות בכלל", "משבצות צבע עם אייקון בלבד.")
-        ).forEach { (mode, title, desc) ->
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .clickable { vm.setImageMode(mode) }
-                    .padding(vertical = 2.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                androidx.compose.material3.RadioButton(
-                    selected = imageMode == mode,
-                    onClick = { vm.setImageMode(mode) },
-                    colors = androidx.compose.material3.RadioButtonDefaults.colors(
-                        selectedColor = Palette.Green,
-                        unselectedColor = Palette.TextMuted
-                    )
-                )
-                Column(Modifier.weight(1f)) {
-                    Text(title, style = MaterialTheme.typography.bodyLarge)
-                    Text(desc, color = Palette.TextSecondary, style = MaterialTheme.typography.bodyMedium)
-                }
-            }
-        }
         Row(
             Modifier
                 .fillMaxWidth()

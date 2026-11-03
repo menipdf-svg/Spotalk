@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,10 +56,10 @@ fun ArtistMarkingSection(vm: MainViewModel, modifier: Modifier = Modifier) {
     var askCode by remember { mutableStateOf(false) }
 
     Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("סימון אמנים", style = MaterialTheme.typography.titleMedium)
+        Text("תמונות וסימון אמנים", style = MaterialTheme.typography.titleMedium)
         if (!unlocked) {
             Text(
-                "סימון ידני של אמנים כגברים או כנשים. הסימון גובר על הזיהוי האוטומטי, ומשפיע על מצב \"רק זמרים גברים\". מוגן בקוד.",
+                "בחירה אם להציג תמונות, רק של זמרים גברים או בלי תמונות, וסימון ידני של אמנים כגברים או כנשים. מוגן בקוד.",
                 color = Palette.TextSecondary,
                 style = MaterialTheme.typography.bodyMedium
             )
@@ -111,6 +112,8 @@ private fun UnlockedMarking(vm: MainViewModel, onLock: () -> Unit) {
         TextButton(onClick = onLock) { Text("נעל", color = Palette.TextSecondary) }
     }
 
+    ImageModePicker(vm)
+
     OutlinedTextField(
         value = query,
         onValueChange = { query = it },
@@ -141,6 +144,40 @@ private fun UnlockedMarking(vm: MainViewModel, onLock: () -> Unit) {
         )
         marked.forEach { (id, name, _) -> MarkRow(vm, id, name, null) }
     }
+}
+
+/** בחירת מצב התמונות: כל התמונות / רק זמרים גברים / בלי תמונות (נמצא רק באזור המוגן בקוד) */
+@Composable
+private fun ImageModePicker(vm: MainViewModel) {
+    val imageMode by vm.settings.imageMode.collectAsState()
+    Text("הצגת תמונות", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(top = 4.dp))
+    listOf(
+        Triple("all", "כל התמונות", "תמונות של אמנים, אלבומים ופלייליסטים."),
+        Triple("male", "רק זמרים גברים", "תמונה מוצגת רק כשכל האמנים זוהו כגברים (אוטומטית או לפי הסימון הידני). זמרות, להקות מעורבות ולא ידוע — בלי תמונה."),
+        Triple("none", "בלי תמונות בכלל", "משבצות צבע עם אייקון בלבד.")
+    ).forEach { (mode, title, desc) ->
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickable { vm.setImageMode(mode) }
+                .padding(vertical = 2.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            androidx.compose.material3.RadioButton(
+                selected = imageMode == mode,
+                onClick = { vm.setImageMode(mode) },
+                colors = androidx.compose.material3.RadioButtonDefaults.colors(
+                    selectedColor = Palette.Green,
+                    unselectedColor = Palette.TextMuted
+                )
+            )
+            Column(Modifier.weight(1f)) {
+                Text(title, style = MaterialTheme.typography.bodyLarge)
+                Text(desc, color = Palette.TextSecondary, style = MaterialTheme.typography.bodyMedium)
+            }
+        }
+    }
+    Text("סימון אמנים", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(top = 8.dp))
 }
 
 /** שורה של אמן: מה זוהה, וכפתורי "גבר" / "אישה" / "בטל" */
