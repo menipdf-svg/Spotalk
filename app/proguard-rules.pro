@@ -1,0 +1,2 @@
+-keep class com.spotify.** { *; }
+-dontwarn com.spotify.**

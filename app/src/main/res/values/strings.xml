@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spotalk</string>
+    <string name="widget_label">חיפוש קולי</string>
+    <string name="widget_text">חפש שיר בקול</string>
+    <string name="widget_description">לחיצה פותחת ישר את העוזר הקולי לחיפוש שירים</string>
+</resources>

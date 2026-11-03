@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- אייקון מקורי: שלושה פסי טקסט ומשולש ניגון. לא הלוגו של Spotify. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#FFFFFFFF" android:pathData="M34,38h26a3,3 0 0,1 0,6h-26a3,3 0 0,1 0,-6z" />
+    <path android:fillColor="#FFB3B3B3" android:pathData="M34,51h18a3,3 0 0,1 0,6h-18a3,3 0 0,1 0,-6z" />
+    <path android:fillColor="#FFB3B3B3" android:pathData="M34,64h14a3,3 0 0,1 0,6h-14a3,3 0 0,1 0,-6z" />
+    <path android:fillColor="#FF1ED760" android:pathData="M60,52 L76,61 L60,70 Z" />
+</vector>

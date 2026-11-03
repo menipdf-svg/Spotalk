@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.TextPlay" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">#FF121212</item>
+        <item name="android:statusBarColor">#FF121212</item>
+        <item name="android:navigationBarColor">#FF000000</item>
+    </style>
+
+    <!-- מסך שקוף בלי ממשק, לפתיחת ההקשבה מהווידג'ט -->
+    <style name="Theme.TextPlay.Transparent" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>
