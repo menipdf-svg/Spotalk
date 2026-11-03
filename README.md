@@ -74,7 +74,7 @@
 ### 2. בנייה
 **במחשב:** פותחים ב-Android Studio ומריצים, או: `./gradlew assembleDebug`. הקובץ: `app/build/outputs/apk/debug/app-debug.apk`.
 
-**ב-GitHub:** עושים Fork, ובכל push ל-`main` נבנה `Spotalk.apk` ועולה ל-Releases (תג `latest`).
+**ב-GitHub:** עושים Fork, ואז Actions ← **Build APK** ← **Run workflow**. הקובץ `Spotalk.apk` נבנה ועולה ל-Releases (תג `latest`). הבנייה לא רצה אוטומטית.
 
 ### 3. מפתח חתימה ו-SHA1
 Spotify מזהה את האפליקציה לפי ה-SHA1 של מפתח החתימה, ולכן הוא חייב להישאר קבוע.
